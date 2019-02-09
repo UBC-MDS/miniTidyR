@@ -11,7 +11,7 @@ Dataframes are fun to work with but they do not always come in the desired shape
           To better understand these funcions, we re-implement them in this package with the following names: my_gather, my_spread, my_dropna.
 }
 \author{
-\strong{Maintainer}: first last \email{orpheliacarenne@gmail.com}
+\strong{Maintainer}: first last \email{first.last@example.com}
 
 }
 \keyword{internal}

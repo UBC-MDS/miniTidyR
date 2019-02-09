@@ -1,8 +1,8 @@
 #' Transform a dataframe from long to wide
 #'
-#' @param data.frame
 #' @param key numeric or character
 #' @param value numeric or character
+#' @param data data.frame
 #'
 #' @return data.frame
 #' @export

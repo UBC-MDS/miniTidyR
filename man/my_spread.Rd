@@ -7,6 +7,8 @@
 my_spread(data, key, value)
 }
 \arguments{
+\item{data}{data.frame}
+
 \item{key}{numeric or character}
 
 \item{value}{numeric or character}
