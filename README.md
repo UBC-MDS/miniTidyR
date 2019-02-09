@@ -10,7 +10,7 @@ For this project we would like to re-implement R’s `gather`, `spread` and `dro
 
 - `my_gather()` : Make data from wide to long by combining columns. For selected columns, put the columns names into a column of keys, and the values into a column of values.
 - `my_spread()` : Separate existing columns into multiple columns.  Select a ‘key’ column whose content will be the names of the new columns. Select a ‘value’ column whose content will be the values of the new columns.
-- `my_dropna()` : Remove NAs from a dataframe.
+- `my_dropna()` : Remove the entire rows that contain `NA` values from a dataframe.
 
 To test these functions , our package will include an additonal function that create a small dataframe with two columns.
 
