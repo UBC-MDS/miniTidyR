@@ -2,13 +2,19 @@
 % Please edit documentation in R/my_dropna.R
 \name{my_dropna}
 \alias{my_dropna}
-\title{Title}
+\title{Returns a new dataframe with the entire rows that contain `na` values removed}
 \usage{
-my_dropna(a)
+my_dropna(input_dataframe)
 }
 \arguments{
-\item{a}{}
+\item{input_dataframe}{data.frame}
+}
+\value{
+data.frame
 }
 \description{
-Title
+Returns a new dataframe with the entire rows that contain `na` values removed
+}
+\examples{
+my_dropna(input_dataframe)
 }
