@@ -12,3 +12,5 @@ To contribute to this project :
 Don't hesitate to communicate with us via Github issues.
 
 > The above strategies are adapted from [Milestone1: Expectations Section](https://github.ubc.ca/MDS-2018-19/DSCI_524_collab-sw-dev_students/blob/master/release/milestone1/milestone1.md).
+
+> The instructions for forking can be found in [Forking Project](https://guides.github.com/activities/forking/).
