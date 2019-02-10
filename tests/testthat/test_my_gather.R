@@ -1,5 +1,10 @@
 context("Testing my_gather")
 
+#' February 2019
+#' This script tests my_gather() function in the miniTidyR package
+#'my_gather() transforms a dataframe from wide to long
+
+
 
 #Test 1: Testing that my_gather works when all arguments are specified
 #and data does not have any missing values

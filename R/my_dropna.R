@@ -1,11 +1,11 @@
 #' Returns a new dataframe with the entire rows that contain `na` values removed
 #'
-#' @param df dataframe
+#' @param input_dataframe data.frame
 #'
-#' @return df dataframe
-#' @export 
+#' @return data.frame
+#' @export
 #'
 #' @examples my_dropna(input_dataframe)
-my_dropna <- function(a) {
+my_dropna <- function(input_dataframe) {
 
 }

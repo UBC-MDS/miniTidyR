@@ -1,5 +1,11 @@
 context("Testing my_spread")
 
+#' February 2019
+#' This script tests my_spread() function in the miniTidyR package
+#'my_spread() transforms a dataframe from long to wide
+#'
+
+
 #Test 1: Testing that my_spread works when all arguments are speciifed
 #and data does not have any missing values
 
