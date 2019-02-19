@@ -11,7 +11,8 @@ context("Testing my_spread")
 
 test_that("Test 1 ", {
 
-df1 <- dplyr::data_frame(Name = c("A","A","B","B"), key = c("Age","Weight","Age","Weight"), value = c(45,80,30,70))
+
+  
 df2 <- dplyr::data_frame(Name = c("A","B"), Age = c(45,30), Weight = c(80,70))
 
 expect_identical(my_spread(df1,key,value), df2)
@@ -30,7 +31,8 @@ expect_error(my_spread(df1), "key and value columns must be selected")
 test_that("Test 3", {
 
 df1 <- dplyr::data_frame(Name = c("A","A","A", "B","B"), key = c("Age","Weight", "Age", "Age","Weight"), value = c(45,80,60,30,70))
-expect_error(my_spread(df1,key,value), "The dataframe does not have unique identifiers")
+expect_error(my_spread(df1,'key','value'), "Dataframe does not have unique identifiers")
+print("Success")
 })
 
 #Test 4: Testing that my_spread works when the value columns has some missing values
@@ -40,7 +42,7 @@ test_that("Test 4 ", {
 df1 <- dplyr::data_frame(Name = c("A","A","B","B"), key = c("Age","Weight","Age","Weight"), value = c("",80,30,""))
 df2 <- dplyr::data_frame(Name = c("A","B"), Age =c("",30), Weight=c(80,""))
 
-expect_identical(my_spread(df1,key,value), df2)
+expect_identical(my_spread(df1,'key','value'), df2)
 })
 
 

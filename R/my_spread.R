@@ -1,16 +1,96 @@
 #' Transform a dataframe from long to wide
 #'
-#' @param key numeric or character
-#' @param value numeric or character
-#' @param data data.frame
+#' @param keycol Name of column whose content will be the names of the new columns, a string
+#' @param valcol Name of column whose content will be the values of the new columns, a sting
+#' @param data data A data frame 
 #'
-#' @return data.frame
+#' @return A data frame
 #' @export
 #'
 #' @examples
 #'df <- data.frame(Name = c("A","A"), key = c("Age","Weight"), value = c(45,80))
-#'my_spread(df,key,value)
-#'
-my_spread <- function(data,key,value) {
+#'my_spread(df,'key','value')
+#
 
+my_spread <- function(data,keycol,valcol) {
+  
+  # Return an error for wrong argument types
+  
+  if(is.data.frame(data) == FALSE) {stop("Input data must be a dataframe")}
+  else if(assertthat::is.string(keycol) == FALSE) {stop("Input keycol must be a string")}
+  else if(assertthat::is.string(valcol) == FALSE) {stop("Input valcol must be a string")}
+  
+  
+  # Return a warning message and the intial dataframe if keycol or valcol is not in the dataframe 
+  
+  col_names_list<- as.list(colnames(data)) 
+  
+  if(is.element(keycol,col_names_list)==FALSE | is.element(valcol,col_names_list)==FALSE ) {
+    warning("A wrong column name was specified, returning input data", immediate. =TRUE) 
+    return(data) }
+  
+  
+  # Return an error message when the data does not have unique identifiers
+  
+  # 1- remove the valcol column from the input dataframe
+  
+  df_wo_valcol <- data[setdiff(names(data), c(valcol))]
+  
+  
+  # 2- get id's of each row
+  
+  df_wo_valcol_id <- as.list(dplyr::id(df_wo_valcol))
+ 
+  
+  # 3- retun an error if id is not unique
+  
+  if (anyDuplicated(df_wo_valcol_id)!=0) {stop("Dataframe does not have unique identifiers")}
+  
+  
+  # Buid the wide dataframe
+  
+  # 0- drop rows with missing values in the key column
+  
+  if (anyNA(data[keycol])==TRUE) {warning("Rows with missing key values were dropped", immediate. =TRUE)
+    data=drop_na(data)}  # REPLACE THIS WITH MY_DROP NA
+  
+  # 1- save new column names of wide dataframe in a list
+  
+  new_col_names = as.list(unique(data[[keycol]])) 
+  
+  # 2- remove keycol and valcol from data
+  
+  df_wo_val_key <- data[setdiff(names(data), c(valcol,keycol))]
+  
+  # 3- Get unique identifiers for each row
+  
+  df_wo_valcol_key_id <- dplyr::id(df_wo_val_key)
+  
+  # 4- Wide data without keycol and valcol
+  
+  wide_data <- plyr::split_labels(df_wo_val_key, df_wo_valcol_key_id)
+  
+  # 5- Create a unique identifier in wide_data
+  
+  wide_data <-unite(wide_data, temp ,names(wide_data), remove=F)
+  
+  # 6- Create a unique identifier in input data
+  
+  df_with_val_key<- unite(df_wo_val_key, temp ,names(df_wo_val_key), remove=F)
+  df_with_val_key<- distinct(inner_join(df_with_val_key, data))
+
+  
+  #6- add keycol and valcol
+  
+  for (j in new_col_names){
+    for(k in df_with_val_key[['temp']] ){
+      for(l in wide_data[['temp']]) {
+    if (k==l){
+     wide_data[[j]] <- df_with_val_key[[valcol]][df_with_val_key[[keycol]]]
+      }}}}
+       
+return(wide_data)
 }
+
+
+
