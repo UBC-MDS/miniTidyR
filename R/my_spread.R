@@ -14,14 +14,16 @@
 
 my_spread <- function(data,keycol,valcol) {
   
-  # Return an error for wrong argument types
+  options( warn=-1)
+  
+  # I- Return an error for wrong argument types
   
   if(is.data.frame(data) == FALSE) {stop("Input data must be a dataframe")}
   else if(assertthat::is.string(keycol) == FALSE) {stop("Input keycol must be a string")}
   else if(assertthat::is.string(valcol) == FALSE) {stop("Input valcol must be a string")}
   
   
-  # Return a warning message and the intial dataframe if keycol or valcol is not in the dataframe 
+  # II-Return a warning message and the input dataframe if keycol or valcol is not in the dataframe 
   
   col_names_list<- as.list(colnames(data)) 
   
@@ -30,7 +32,12 @@ my_spread <- function(data,keycol,valcol) {
     return(data) }
   
   
-  # Return an error message when the data does not have unique identifiers
+  # III-Return an error message when the data does not have unique identifiers
+  
+  # 0- drop rows with missing values in the key column
+  
+  if (anyNA(data[keycol])==TRUE) {warning("Rows with missing key values were dropped", immediate. =TRUE)
+    data=drop_na(data)}  # REPLACE THIS WITH MY_DROP NA
   
   # 1- remove the valcol column from the input dataframe
   
@@ -47,61 +54,62 @@ my_spread <- function(data,keycol,valcol) {
   if (anyDuplicated(df_wo_valcol_id)!=0) {stop("Dataframe does not have unique identifiers")}
   
   
-  # Buid the wide dataframe
-  
-  # 0- drop rows with missing values in the key column
-  
-  if (anyNA(data[keycol])==TRUE) {warning("Rows with missing key values were dropped", immediate. =TRUE)
-    data=drop_na(data)}  # REPLACE THIS WITH MY_DROP NA
+  # IV-Buid the wide dataframe
   
   # 1- save new column names of wide dataframe in a list
   
-  new_col_names = as.list(unique(data[[keycol]])) 
+  new_col_names = unique(data[[keycol]]) 
   
   # 2- remove keycol and valcol from data
   
   df_wo_val_key <- data[setdiff(names(data), c(valcol,keycol))]
   
-  # 3- Get unique identifiers for each row
   
-  df_wo_valcol_key_id <- dplyr::id(df_wo_val_key)
+  # 3- get unique identifiers for each row
   
-  # 4- Wide data without keycol and valcol
+  df_wo_val_key_id <- dplyr::id(df_wo_val_key)
   
-  wide_data <- plyr::split_labels(df_wo_val_key, df_wo_valcol_key_id)
   
-  # 5- Create a unique identifier in wide_data
+  # 4- create wide data without keycol and valcol
+  
+  wide_data <- plyr::split_labels(df_wo_val_key, df_wo_val_key_id)
+ 
+  
+  # 5- create a unique identifier in wide_data, temp
   
   wide_data <-unite(wide_data, temp ,names(wide_data), remove=F)
   
-  # 6- Create a unique identifier in input data
+  
+  # 6- create a unique identifier in input data
   
   df_with_val_key<- unite(df_wo_val_key, temp ,names(df_wo_val_key), remove=F)
   df_with_val_key<- distinct(inner_join(df_with_val_key, data))
 
   
-  #6- add keycol and valcol
+  #7- add keycol and valcol
   
  for (j in new_col_names){
-   
    wide_data[[j]] <- NA
  }
+  
 
-# This below code reads from the wide data , matches with corresponding original data with created unique id.   #
-# Then it picks the matched column of that row and insert the 'value' in wide data under the matching column.   #
+ # The below code reads from the wide data , matches with corresponding original data with created unique id.   #
+ # Then it picks the matched column of that row and insert the 'value' in wide data under the matching column.   #
   
   for(i in 1:nrow(wide_data)) { 
     for(j in 1: nrow(df_with_val_key)) {
-      if(wide_data[['temp']][i]== df_with_val_key[['temp']][j]){# Matching the unique Ids. of wide data with original.
-        for (k in new_col_names){                               # Checking the 'key' values to identify the 
-          if(df_with_val_key[[keycol]][j]==k) {                 # column name of 'key'. 
-            wide_data[[k]][i] <-  df_with_val_key[[valcol]][j]  # Inserting the 'key' value in wide data column.
+      if(wide_data[['temp']][i]== df_with_val_key[['temp']][j]){ # Matching the unique Ids. of wide data with original.
+       for (k in new_col_names){                                # Checking the 'key' values to identify the 
+         if(df_with_val_key[[keycol]][j]==k) {                  # column name of 'key'. 
+            wide_data[[k]][i] <-  df_with_val_key[[valcol]][j]   # Inserting the 'key' value in wide data column.
           }  
         }
       }
     }
   }
-wide_data <- wide_data[-1]
+  
+wide_data <- as.data.frame(wide_data[-1])
+
 return(wide_data)
 }
 
