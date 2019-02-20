@@ -82,13 +82,26 @@ my_spread <- function(data,keycol,valcol) {
   
   #6- add keycol and valcol
   
-  for (j in new_col_names){
-    for(k in df_with_val_key[['temp']] ){
-      for(l in wide_data[['temp']]) {
-    if (k==l){
-     wide_data[[j]] <- df_with_val_key[[valcol]][df_with_val_key[[keycol]]]
-      }}}}
-       
+ for (j in new_col_names){
+   
+   wide_data[[j]] <- NA
+ }
+
+# This below code reads from the wide data , matches with corresponding original data with created unique id.   #
+# Then it picks the matched column of that row and insert the 'value' in wide data under the matching column.   #
+  
+  for(i in 1:nrow(wide_data)) { 
+    for(j in 1: nrow(df_with_val_key)) {
+      if(wide_data[['temp']][i]== df_with_val_key[['temp']][j]){# Matching the unique Ids. of wide data with original.
+        for (k in new_col_names){                               # Checking the 'key' values to identify the 
+          if(df_with_val_key[[keycol]][j]==k) {                 # column name of 'key'. 
+            wide_data[[k]][i] <-  df_with_val_key[[valcol]][j]  # Inserting the 'key' value in wide data column.
+          }  
+        }
+      }
+    }
+  }
+wide_data <- wide_data[-1]
 return(wide_data)
 }
 
