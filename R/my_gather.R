@@ -40,7 +40,7 @@ my_gather <- function(data, keyname="key",valuename="value",chosen_cols) {
     return(data) }
   
   
-  # Define the transformed data when all argumens are correctly specified
+  # Define the transformed data when all arguments are correctly specified
   
   # 1-save the content of the "keyname" column in a vector
   
