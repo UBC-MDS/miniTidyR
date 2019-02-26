@@ -32,7 +32,7 @@ my_spread <- function(data,keycol,valcol) {
     return(data) }
   
   
-  # III-Return an error message when the data does not have unique identifiers
+  # III-Return an error message when the data do not have unique identifiers
   
   # 0- drop rows with missing values in the key column
   
@@ -75,12 +75,12 @@ my_spread <- function(data,keycol,valcol) {
   wide_data <- plyr::split_labels(df_wo_val_key, df_wo_val_key_id)
  
   
-  # 5- create a unique identifier in wide_data, temp
+  # 5- create a unique identifier in wide_data called temp
   
   wide_data <-unite(wide_data, temp ,names(wide_data), remove=F)
   
   
-  # 6- create a unique identifier in input data
+  # 6- create a unique identifier in input data called temp
   
   df_with_val_key<- unite(df_wo_val_key, temp ,names(df_wo_val_key), remove=F)
   df_with_val_key<- distinct(inner_join(df_with_val_key, data))
