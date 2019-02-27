@@ -11,7 +11,7 @@ my_gather(data, keyname = "key", valuename = "value", chosen_cols)
 
 \item{keyname}{Name of new key column, a string}
 
-\item{valuename}{name of new value column , a string}
+\item{valuename}{Name of new value column , a string}
 
 \item{chosen_cols}{Name of columns to be gathered, a list}
 }
