@@ -5,6 +5,8 @@ context("Testing my_spread")
 #'my_spread() transforms a dataframe from long to wide
 #'
 
+library(testthat)
+
 #Dataframes
 
 matrix <- matrix(ncol=3, nrow=2)
@@ -50,7 +52,7 @@ test_that("Input df and a warning msg are returned when keycol is not in df", {
 test_that("Input df and a warning msg are returned when valcol is not in df ", {
      
   expect_warning(my_spread(df1, 'key' , 'Values' ), "A wrong column name was specified, returning input data")
-  expect_equal(my_spread(df1, 'key' , 'Values'), df1)
+  expect_identical(my_spread(df1, 'key' , 'Values'), df1)
   print("Yay")
    })
  
@@ -74,7 +76,7 @@ test_that("An error is returned when df does not have unique identifiers (2)", {
 test_that("my_spread works when all arguments are correctly specified (1)", {
     
   output1 <- data.frame(Name = c("A", "B"), Age = c(45,30), Weight = c(80,70))
-  expect_equal(my_spread(df1,'key','value'), output1)
+  expect_identical(my_spread(df1,'key','value'), output1)
   print(" Correct!")
   })
   
@@ -82,7 +84,7 @@ test_that("my_spread works when all arguments are correctly specified (1)", {
 test_that("my_spread works when all arguments are correctly specified (2)", {
     
   output2 <- data.frame(Last = c("hihi","li", "lo"), First = c("ho","hey", "hi"), Middle = c("B","A","A"), Age = c(30,NA,45), Weight = c(70,80,NA))
-  expect_equal(my_spread(df4,'key','value'), output2)
+  expect_identical(my_spread(df4,'key','value'), output2)
   print(" Correct!")
   })
   
@@ -100,7 +102,7 @@ test_that("my_spread works when all arguments are correctly specified (3)", {
 test_that("my_spread works when the value columns has some missing values", {
 
   output4 <- data.frame(Name = c("A","B"), Age =c(NA,30), Weight=c(80,NA))
-  expect_equal(my_spread(df6,'key','value'), output4)
+  expect_identical(my_spread(df6,'key','value'), output4)
   print("Excellent!")
   })
 
@@ -111,7 +113,7 @@ test_that("my_spread drops rows with missing key values before spreading and pri
 
  output5 <- data.frame(Name = c("A","B"), Weight = c(80,70),Age = c(NA,30))
  expect_warning(my_spread(df7,'key','value'), "Rows with missing key values were dropped")
- expect_equal(my_spread(df7,'key','value'), output5)
+ expect_identical(my_spread(df7,'key','value'), output5)
  print("Excellent!")
   })
   
