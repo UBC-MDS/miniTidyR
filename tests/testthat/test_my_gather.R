@@ -4,6 +4,8 @@ context("Testing my_gather")
 #' This script tests my_gather() function in the miniTidyR package
 #'my_gather() transforms a dataframe from wide to long
 
+library(testthat)
+
 #Dataframes
 matrix <- matrix(ncol=3, nrow=2)
 df0 <- data.frame(Groups = c("A","B","C","D"), Married = c(12,25,30,45), Other = c(100,55,60,90))
