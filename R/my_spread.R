@@ -12,6 +12,8 @@
 #'my_spread(df,'key','value')
 #
 
+utils::globalVariables("temp")
+
 my_spread <- function(data,keycol,valcol) {
   
   options( warn=-1)
@@ -37,7 +39,7 @@ my_spread <- function(data,keycol,valcol) {
   # 0- drop rows with missing values in the key column
   
   if (anyNA(data[keycol])==TRUE) {warning("Rows with missing key values were dropped", immediate. =TRUE)
-    data=drop_na(data)}  # REPLACE THIS WITH MY_DROP NA
+    data= tidyr::drop_na(data)}  # REPLACE THIS WITH MY_DROP NA
   
   # 1- remove the valcol column from the input dataframe
   
@@ -77,13 +79,15 @@ my_spread <- function(data,keycol,valcol) {
   
   # 5- create a unique identifier in wide_data called temp
   
-  wide_data <-unite(wide_data, temp ,names(wide_data), remove=F)
+  
+  wide_data <-tidyr::unite(wide_data, temp ,names(wide_data), remove=F)
   
   
   # 6- create a unique identifier in input data called temp
   
-  df_with_val_key<- unite(df_wo_val_key, temp ,names(df_wo_val_key), remove=F)
-  df_with_val_key<- distinct(inner_join(df_with_val_key, data))
+  
+  df_with_val_key<- tidyr::unite(df_wo_val_key, temp ,names(df_wo_val_key), remove=F)
+  df_with_val_key<- dplyr::distinct(dplyr::inner_join(df_with_val_key, data))
 
   
   #7- add keycol and valcol
