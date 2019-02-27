@@ -10,8 +10,13 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports: 
+    plyr,
     dplyr,
     base,
     assertthat,
-    plyr
+    tidyr,
+    testthat,
+    utils
 RoxygenNote: 6.1.1
+Suggests: 
+    covr
