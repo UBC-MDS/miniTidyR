@@ -29,7 +29,26 @@ test_that("In case input is a dataframe containing numbers, characters, and NAs,
 
 test_that("In case input is a dataframe containing numbers, characters, and NAs, it works", {
   
-  df3 <- data.frame(A = c(12,45), B = c(12,45), C = c("Yes","No"))
+  df3 <- data.frame(A = c(1,3), B = c("a","b"), C = c(20,20))
   
   expect_identical(my_dropna(df3), df3)
+})
+
+#Test 4: Testing that my_dropna works on a empty dataframe
+
+test_that("In case input is a dataframe containing numbers, characters, and NAs, it works", {
+  
+  df4 <- data.frame()
+  
+  expect_identical(my_dropna(df4), df4)
+})
+
+#Test 5: Testing that the output of my_dropna is also a dataframe
+
+test_that("my_dropna outputs a dataframe", {
+  
+  expect_identical(class(my_dropna(df1)), "data.frame") 
+  expect_identical(class(my_dropna(df2)), "data.frame") 
+  expect_identical(class(my_dropna(df3)), "data.frame") 
+  expect_identical(class(my_dropna(df4)), "data.frame") 
 })
