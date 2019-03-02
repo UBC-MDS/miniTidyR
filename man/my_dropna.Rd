@@ -7,14 +7,17 @@
 my_dropna(input_dataframe)
 }
 \arguments{
-\item{input_dataframe}{data.frame}
+\item{input_dataframe}{A data frame}
 }
 \value{
-data.frame
+A data frame
 }
 \description{
 Returns a new dataframe with the entire rows that contain `na` values removed
 }
 \examples{
+input_dataframe <-  data.frame(A = c(12,25,NA,45), B = c(12,NA,30,45))
 my_dropna(input_dataframe)
+
+
 }
