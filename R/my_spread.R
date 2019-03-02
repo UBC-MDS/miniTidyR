@@ -30,7 +30,7 @@ my_spread <- function(data,keycol,valcol) {
   col_names_list<- as.list(colnames(data)) 
   
   if(is.element(keycol,col_names_list)==FALSE | is.element(valcol,col_names_list)==FALSE ) {
-    warning("A wrong column name was specified, returning input data", immediate. =TRUE) 
+    warning("column name does not exist in the data frame, returning input data", immediate. =TRUE) 
     return(data) }
   
   
