@@ -12,6 +12,7 @@ df0 <- data.frame(Groups = c("A","B","C","D"), Married = c(12,25,30,45), Other =
 df1 <- data.frame(Single = c(12,25,30,45), Married = c(12,25,30,45), Other = c(100,55,60,90))
 df2 <- data.frame(Groups = c("A",NA,"C","D"), Married = c(12,25,NA,45), Other = c(NA,55,60,90))
 df3 <- data.frame(Groups = c(NA,NA,NA,NA), Married = c(NA,NA,NA,NA), Other = c(NA,NA,NA,NA))
+df4 <- data.frame(Happy= c(NA, 100, 60,56,20,NA,30))
 
 #Test 0: Test that my_gather returns an error for wrong input types
 
@@ -103,7 +104,17 @@ test_that("my_gather works when a dataframe only has missing values", {
 })
 
 
-# Test 7: Testing that final output is a dataframe
+#Test 7: Testing that my_gather works when the dataframe only has one column
+
+test_that("my_gather works when the dataframe only has one column", {
+  
+  output6 <-data.frame(Feeling=c("Happy","Happy","Happy","Happy", "Happy","Happy","Happy"), Ratings = c(NA,100,60,56,20,NA,30))
+  expect_identical(my_gather(df4, "Feeling","Ratings",list("Happy")), output6)
+  print("Excellent!")
+})
+
+
+# Test 8: Testing that final output is a dataframe
 
 test_that("final output is a dataframe", {
   
