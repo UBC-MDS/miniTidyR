@@ -44,14 +44,14 @@ test_that("An error is returned when input valcol is not a string", {
  
 test_that("Input df and a warning msg are returned when keycol is not in df", {
     
-  expect_warning(my_spread(df1, 'ky' , 'Value'), "A wrong column name was specified, returning input data")
+  expect_warning(my_spread(df1, 'ky' , 'Value'), "column name does not exist in the data frame, returning input data")
   expect_identical(my_spread(df1, 'ky' , 'Value'), df1)
   print("Yay")
  })
    
 test_that("Input df and a warning msg are returned when valcol is not in df ", {
      
-  expect_warning(my_spread(df1, 'key' , 'Values' ), "A wrong column name was specified, returning input data")
+  expect_warning(my_spread(df1, 'key' , 'Values' ), "column name does not exist in the data frame, returning input data")
   expect_identical(my_spread(df1, 'key' , 'Values'), df1)
   print("Yay")
    })
