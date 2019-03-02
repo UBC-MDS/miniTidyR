@@ -14,6 +14,7 @@ Imports:
     dplyr,
     base,
     assertthat,
+    tidyr,
     testthat,
     utils
 RoxygenNote: 6.1.1
