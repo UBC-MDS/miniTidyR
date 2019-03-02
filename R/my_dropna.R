@@ -1,13 +1,19 @@
 #' Returns a new dataframe with the entire rows that contain `na` values removed
 #'
-#' @param input_dataframe data.frame
+#' @param input_dataframe A data frame
 #'
-#' @return data.frame
+#' @return A data frame
 #' @export
 #'
-#' @examples my_dropna(input_dataframe)
+#' @examples 
+#' input_dataframe <-  data.frame(A = c(12,25,NA,45), B = c(12,NA,30,45))
+#' my_dropna(input_dataframe)
+#' 
+#' 
 my_dropna <- function(input_dataframe) {
+  
   # check whether input is dataframe
+  
   if(is.data.frame(input_dataframe)==FALSE){
     stop("Expect input to be a dataframe")}
   
@@ -29,6 +35,10 @@ my_dropna <- function(input_dataframe) {
       if(na_count==0){to_keep<-c(to_keep,i)}} 
     # only keep the rows with no NA
     output_dataframe <- input_dataframe[to_keep, ]}
+  
+  # changing the rownames to match the new number of rows 
+  if(rows*columns != 0 ){
+  row.names(output_dataframe)<- 1: nrow(output_dataframe) }
   
   return (output_dataframe)
 }
