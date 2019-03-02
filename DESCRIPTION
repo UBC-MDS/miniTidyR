@@ -9,8 +9,14 @@ Depends: R (>= 3.5.0)
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-Suggests: 
-    testthat
 Imports: 
-    dplyr
+    plyr,
+    dplyr,
+    base,
+    assertthat,
+    tidyr,
+    testthat,
+    utils
 RoxygenNote: 6.1.1
+Suggests: 
+    covr

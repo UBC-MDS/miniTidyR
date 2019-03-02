@@ -4,25 +4,27 @@
 \alias{my_gather}
 \title{Tranform a dataframe from wide to long}
 \usage{
-my_gather(data, key = NULL, value = NULL, chosen_cols = NULL)
+my_gather(data, keyname = "key", valuename = "value", chosen_cols)
 }
 \arguments{
-\item{data}{data.frame}
+\item{data}{A data frame}
 
-\item{key}{numeric or character}
+\item{keyname}{Name of new key column, a string}
 
-\item{value}{numeric or character}
+\item{valuename}{name of new value column , a string}
 
-\item{chosen_cols}{numeric or character}
+\item{chosen_cols}{Name of columns to be gathered, a list}
 }
 \value{
-data.frame
+A data frame
 }
 \description{
 Tranform a dataframe from wide to long
 }
 \examples{
 df <- data.frame(Groups = c("A","B"), Married = c(12,25), Other = c(100,55))
-my_gather(df, status,count,Married,Other)
+my_gather(df,"status","count", list("Married","Other"))
+
+
 
 }

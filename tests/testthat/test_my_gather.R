@@ -56,7 +56,7 @@ expect_identical(my_gather(df1,status,count,Married,Other), df2)
 test_that("Test 5", {
 
 matrix <- matrix(ncol=3, nrow=2)
-expect_error(my_gather(matrixt), "The first argument must be a dataframe or a tibble")
+expect_error(my_gather(matrix), "The first argument must be a dataframe")
 
 })
 
