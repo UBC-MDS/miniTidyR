@@ -21,13 +21,28 @@ To install  `miniTidyR` run :  `devtools::install_github("https://github.com/UBC
 
 #### `my_dropna`
 
+```
+df1 <- data.frame(A = c(12,25,NA,45), B = c(12,NA,30,45))
+my_dropna(df1)
+```
+
 ![](images/my_dropna.PNG)
 
 #### `my_gather`
 
+```
+df2 <- data.frame(Groups = c("A","B"), Married = c(12,25), Other = c(100,55))
+my_gather(df2, "Status", "Count", list("Married","Other"))
+```
+
 ![](images/my_gather.PNG)
 
 #### `my_spread`
+
+```
+df3 <- data.frame(Name = c("A","A","B","B"), key = c("Age","Weight","Age","Weight"), value = c(45,80,30,70))
+my_spread(df3,'key','value')
+```
 
 ![](images/my_spread.PNG)
 
