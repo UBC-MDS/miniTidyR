@@ -44,7 +44,7 @@ test_that("An error is returned when input chosen_cols is not a list", {
 
 test_that("Input df and a warning msg are returned when chosen_cols has wrong column names", {
 
-  expect_warning(my_gather(df0, "key" , "value", list("Others","Maried")), "A wrong column name was specified, returning input data")
+  expect_warning(my_gather(df0, "key" , "value", list("Others","Maried")), "column name does not exist in the data frame, returning input data")
   expect_identical(my_gather(df0, "key" , "value", list("Others","Maried")), df0)
 
 })
