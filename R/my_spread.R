@@ -14,7 +14,7 @@
 #'
 my_spread <- function(data,keycol,valcol) {
 
-  #options( warn=-1)
+  options( warn=-1)
   temp <- NULL
 
   # I- Return an error for wrong argument types
