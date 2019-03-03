@@ -15,9 +15,10 @@ Our functions are called `my_gather` , `my_spread` and `my_dropna`:
 - `my_dropna()` : Remove rows that contain `NA` values from a data frame.
 
 ### Installation
-To install  `miniTidyR` run :  
+To install and load `miniTidyR` run :  
 
 - `devtools::install_github("https://github.com/UBC-MDS/miniTidyR")`
+- `library(miniTidyR)`
 
 To access the vignette run:
 
@@ -48,7 +49,7 @@ my_gather(df2, "Status", "Count", list("Married","Other"))
 
 ```
 df3 <- data.frame(Name = c("A","A","B","B"), key = c("Age","Weight","Age","Weight"), value = c(45,80,30,70))
-my_spread(df3,'key','value')
+my_spread(df3,"key","value")
 ```
 
 ![](images/my_spread.PNG)
