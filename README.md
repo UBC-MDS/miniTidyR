@@ -15,7 +15,14 @@ Our functions are called `my_gather` , `my_spread` and `my_dropna`:
 - `my_dropna()` : Remove rows that contain `NA` values from a data frame.
 
 ### Installation
-To install  `miniTidyR` run :  `devtools::install_github("https://github.com/UBC-MDS/miniTidyR")`
+To install  `miniTidyR` run :  
+
+- `devtools::install_github("https://github.com/UBC-MDS/miniTidyR")`
+
+To access the vignette run:
+
+- `devtools::install(build_vignettes=TRUE)`
+-  `browseVignettes("miniTidyR")`
 
 ### Function usage examples
 
