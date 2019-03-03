@@ -1,0 +1,69 @@
+---
+title: "miniTidyR"
+author: "Huijue Chen, Orphelia Ellogne, Luo Yang"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{miniTidyR}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+In this package we re-implemented R’s `gather`, `spread`, and `drop_na` functions that exist in `tidyverse`.
+
+## Functions
+
+`my_gather(data, keyname="key",valuename="value",chosen_cols)`
+
+Transform a data from wide to long by combining columns. For selected columns, put the columns names into a column of keys, and the values into a column of values.
+
+- data: A data frame
+- keyname: Name of new key column, a string
+- valuename: Name of new value column , a string
+- chosen_cols: Name of columns to be gathered, a list
+
+`my_spread(data, keycol, valcol)` 
+
+Transform a data from long to wide.  Select a ‘key’ column whose content will be the names of the new columns. Select a ‘value’ column whose content will be the values of the new columns.
+
+- keycol: Name of column whose content will be the names of the new columns, a string
+- valcol: Name of column whose content will be the values of the new columns, a sting
+- data: A data frame
+
+`my_dropna(input_dataframe)`
+
+Remove rows that contain `NA` values from a data frame.
+
+- input_dataframe: A data frame
+
+## Examples
+
+```{r}
+# load the package
+library(miniTidyR)
+```
+
+```{r}
+# example for my_dropna
+df1 <- data.frame(A = c(12,25,NA,45), B = c(12,NA,30,45))
+my_dropna(df1)
+```
+
+```{r}
+# example for my_gather
+df2 <- data.frame(Groups = c("A","B"), Married = c(12,25), Other = c(100,55))
+my_gather(df2, "Status", "Count", list("Married","Other"))
+```
+
+```{r}
+# example for my_spread
+df3 <- data.frame(Name = c("A","A","B","B"), key = c("Age","Weight","Age","Weight"), value = c(45,80,30,70))
+my_spread(df3,'key','value')
+```
