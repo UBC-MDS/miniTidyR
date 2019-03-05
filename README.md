@@ -1,5 +1,7 @@
 # R Mini Tidy Package : `miniTidyR`
 
+[![Build Status](https://travis-ci.org/UBC-MDS/miniTidyR.svg?branch=master)](https://travis-ci.org/UBC-MDS/miniTidyR)
+
 ### Contributors:
 - Huijue Chen (`huijuechen`)
 - Luo Yang (`lyiris22`)
