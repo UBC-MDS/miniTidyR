@@ -65,3 +65,5 @@ my_spread(df3,"key","value")
 ### Test output
 
 ![](images/test_results.PNG)
+
+**Please note that these 6 warnings are part of the code**
