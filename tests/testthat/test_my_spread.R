@@ -1,6 +1,6 @@
 context("Testing my_spread")
 
-#' February 2019
+#' March 2019
 #' This script tests my_spread() function in the miniTidyR package
 #'my_spread() transforms a dataframe from long to wide
 #'
