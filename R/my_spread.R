@@ -14,7 +14,6 @@
 #'
 my_spread <- function(data,keycol,valcol) {
 
-  options( warn=-1)
   temp <- NULL
 
   # I- Return an error for wrong argument types
@@ -46,7 +45,7 @@ my_spread <- function(data,keycol,valcol) {
 
   # 2- get id's of each row
 
-  df_wo_valcol_id <- as.list(dplyr::id(df_wo_valcol))
+  df_wo_valcol_id <- as.list(dplyr::group_indices_(df_wo_valcol, .dots= names(df_wo_valcol)))
 
   # 3- retun an error if id is not unique
 
@@ -62,24 +61,20 @@ my_spread <- function(data,keycol,valcol) {
 
   df_wo_val_key <- data[setdiff(names(data), c(valcol,keycol))]
 
-  # 3- get unique identifiers for each row
+  # 3- create wide data without keycol and valcol
 
-  df_wo_val_key_id <- dplyr::id(df_wo_val_key)
+  wide_data <- plyr::split_labels(df_wo_val_key, drop=TRUE, id= dplyr::group_indices_(df_wo_val_key, .dots=names(df_wo_val_key)))
 
-  # 4- create wide data without keycol and valcol
-
-  wide_data <- plyr::split_labels(df_wo_val_key, df_wo_val_key_id)
-
-  # 5- create a unique identifier in wide_data called temp
+  # 4- create a unique identifier in wide_data called temp
 
   wide_data <-tidyr::unite(wide_data, temp ,names(wide_data), remove=F)
 
-  # 6- create a unique identifier in input data called temp
+  # 5- create a unique identifier in input data called temp
 
   df_with_val_key<- tidyr::unite(df_wo_val_key, temp ,names(df_wo_val_key), remove=F)
   df_with_val_key<- suppressMessages(dplyr::distinct(dplyr::inner_join(df_with_val_key, data)))
 
-  #7- add keycol and valcol
+  #6- add keycol and valcol
 
  for (j in new_col_names){
    wide_data[[j]] <- NA
