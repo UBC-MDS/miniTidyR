@@ -4,7 +4,7 @@ Version: 0.0.0.9000
 Authors@R: person("first", "last", email = "first.last@example.com", role = c("aut", "cre"))
 Description: Dataframes are fun to work with but they do not always come in the desired shape.
           The tidyverse functions 'gather', 'spread' and 'drop_na' gracefully address some of the messy dataframe issues. 
-          To better understand these funcions, we re-implement them in this package with the following names: my_gather, my_spread, my_dropna. 
+          To better understand these functddions, we re-implement them in this package with the following names: my_gather, my_spread, my_dropna. 
 Depends: R (>= 3.5.0)
 License: MIT + file LICENSE
 Encoding: UTF-8
