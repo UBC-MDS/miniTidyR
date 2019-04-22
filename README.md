@@ -1,5 +1,7 @@
 # R Mini Tidy Package : `miniTidyR`
 
+[![Build Status](https://travis-ci.org/UBC-MDS/miniTidyR.svg?branch=master)](https://travis-ci.org/UBC-MDS/miniTidyR)
+
 ### Contributors:
 - Huijue Chen (`huijuechen`)
 - Luo Yang (`lyiris22`)
@@ -34,7 +36,13 @@ df1 <- data.frame(A = c(12,25,NA,45), B = c(12,NA,30,45))
 my_dropna(df1)
 ```
 
-![](images/my_dropna.PNG)
+###### df1
+
+![](images/df1.PNG)
+
+###### my_dropna(df1)
+
+![](images/output1.PNG)
 
 #### `my_gather`
 
@@ -43,7 +51,13 @@ df2 <- data.frame(Groups = c("A","B"), Married = c(12,25), Other = c(100,55))
 my_gather(df2, "Status", "Count", list("Married","Other"))
 ```
 
-![](images/my_gather.PNG)
+###### df2
+
+![](images/df2.PNG)
+
+###### my_gather(df2, "Status", "Count", list("Married","Other"))
+
+![](images/output2.PNG)
 
 #### `my_spread`
 
@@ -51,8 +65,13 @@ my_gather(df2, "Status", "Count", list("Married","Other"))
 df3 <- data.frame(Name = c("A","A","B","B"), key = c("Age","Weight","Age","Weight"), value = c(45,80,30,70))
 my_spread(df3,"key","value")
 ```
+###### df3
 
-![](images/my_spread.PNG)
+![](images/df3.PNG)
+
+###### my_spread(df3,"key","value")
+
+![](images/output3.PNG)
 
 ### Branch coverage
 
